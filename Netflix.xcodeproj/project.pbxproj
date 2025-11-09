@@ -16,37 +16,37 @@
 			containerPortal = 327FB4A52DD9C5C3007A709A /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 327FB4AC2DD9C5C3007A709A;
-			remoteInfo = Notflix;
+			remoteInfo = Netflix;
 		};
 		327FB4C62DD9C5C5007A709A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 327FB4A52DD9C5C3007A709A /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 327FB4AC2DD9C5C3007A709A;
-			remoteInfo = Notflix;
+			remoteInfo = Netflix;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		327FB4AD2DD9C5C3007A709A /* Notflix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notflix.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		327FB4BB2DD9C5C5007A709A /* NotflixTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotflixTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		327FB4C52DD9C5C5007A709A /* NotflixUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotflixUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		327FB4AD2DD9C5C3007A709A /* Netflix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Netflix.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		327FB4BB2DD9C5C5007A709A /* NetflixTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetflixTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		327FB4C52DD9C5C5007A709A /* NetflixUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetflixUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		327FB4AF2DD9C5C3007A709A /* Notflix */ = {
+		327FB4AF2DD9C5C3007A709A /* Netflix */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Notflix;
+			path = Netflix;
 			sourceTree = "<group>";
 		};
-		327FB4BE2DD9C5C5007A709A /* NotflixTests */ = {
+		327FB4BE2DD9C5C5007A709A /* NetflixTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = NotflixTests;
+			path = NetflixTests;
 			sourceTree = "<group>";
 		};
-		327FB4C82DD9C5C5007A709A /* NotflixUITests */ = {
+		327FB4C82DD9C5C5007A709A /* NetflixUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = NotflixUITests;
+			path = NetflixUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -80,9 +80,9 @@
 		327FB4A42DD9C5C3007A709A = {
 			isa = PBXGroup;
 			children = (
-				327FB4AF2DD9C5C3007A709A /* Notflix */,
-				327FB4BE2DD9C5C5007A709A /* NotflixTests */,
-				327FB4C82DD9C5C5007A709A /* NotflixUITests */,
+				327FB4AF2DD9C5C3007A709A /* Netflix */,
+				327FB4BE2DD9C5C5007A709A /* NetflixTests */,
+				327FB4C82DD9C5C5007A709A /* NetflixUITests */,
 				327FB4AE2DD9C5C3007A709A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,9 +90,9 @@
 		327FB4AE2DD9C5C3007A709A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				327FB4AD2DD9C5C3007A709A /* Notflix.app */,
-				327FB4BB2DD9C5C5007A709A /* NotflixTests.xctest */,
-				327FB4C52DD9C5C5007A709A /* NotflixUITests.xctest */,
+				327FB4AD2DD9C5C3007A709A /* Netflix.app */,
+				327FB4BB2DD9C5C5007A709A /* NetflixTests.xctest */,
+				327FB4C52DD9C5C5007A709A /* NetflixUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -100,9 +100,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		327FB4AC2DD9C5C3007A709A /* Notflix */ = {
+		327FB4AC2DD9C5C3007A709A /* Netflix */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 327FB4CF2DD9C5C5007A709A /* Build configuration list for PBXNativeTarget "Notflix" */;
+			buildConfigurationList = 327FB4CF2DD9C5C5007A709A /* Build configuration list for PBXNativeTarget "Netflix" */;
 			buildPhases = (
 				327FB4A92DD9C5C3007A709A /* Sources */,
 				327FB4AA2DD9C5C3007A709A /* Frameworks */,
@@ -113,19 +113,19 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				327FB4AF2DD9C5C3007A709A /* Notflix */,
+				327FB4AF2DD9C5C3007A709A /* Netflix */,
 			);
-			name = Notflix;
+			name = Netflix;
 			packageProductDependencies = (
 				3284BA192DE44FC3004B2A0A /* RiveRuntime */,
 			);
-			productName = Notflix;
-			productReference = 327FB4AD2DD9C5C3007A709A /* Notflix.app */;
+			productName = Netflix;
+			productReference = 327FB4AD2DD9C5C3007A709A /* Netflix.app */;
 			productType = "com.apple.product-type.application";
 		};
-		327FB4BA2DD9C5C5007A709A /* NotflixTests */ = {
+		327FB4BA2DD9C5C5007A709A /* NetflixTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 327FB4D22DD9C5C5007A709A /* Build configuration list for PBXNativeTarget "NotflixTests" */;
+			buildConfigurationList = 327FB4D22DD9C5C5007A709A /* Build configuration list for PBXNativeTarget "NetflixTests" */;
 			buildPhases = (
 				327FB4B72DD9C5C5007A709A /* Sources */,
 				327FB4B82DD9C5C5007A709A /* Frameworks */,
@@ -137,18 +137,18 @@
 				327FB4BD2DD9C5C5007A709A /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				327FB4BE2DD9C5C5007A709A /* NotflixTests */,
+				327FB4BE2DD9C5C5007A709A /* NetflixTests */,
 			);
-			name = NotflixTests;
+			name = NetflixTests;
 			packageProductDependencies = (
 			);
-			productName = NotflixTests;
-			productReference = 327FB4BB2DD9C5C5007A709A /* NotflixTests.xctest */;
+			productName = NetflixTests;
+			productReference = 327FB4BB2DD9C5C5007A709A /* NetflixTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		327FB4C42DD9C5C5007A709A /* NotflixUITests */ = {
+		327FB4C42DD9C5C5007A709A /* NetflixUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 327FB4D52DD9C5C5007A709A /* Build configuration list for PBXNativeTarget "NotflixUITests" */;
+			buildConfigurationList = 327FB4D52DD9C5C5007A709A /* Build configuration list for PBXNativeTarget "NetflixUITests" */;
 			buildPhases = (
 				327FB4C12DD9C5C5007A709A /* Sources */,
 				327FB4C22DD9C5C5007A709A /* Frameworks */,
@@ -160,13 +160,13 @@
 				327FB4C72DD9C5C5007A709A /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				327FB4C82DD9C5C5007A709A /* NotflixUITests */,
+				327FB4C82DD9C5C5007A709A /* NetflixUITests */,
 			);
-			name = NotflixUITests;
+			name = NetflixUITests;
 			packageProductDependencies = (
 			);
-			productName = NotflixUITests;
-			productReference = 327FB4C52DD9C5C5007A709A /* NotflixUITests.xctest */;
+			productName = NetflixUITests;
+			productReference = 327FB4C52DD9C5C5007A709A /* NetflixUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -192,7 +192,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 327FB4A82DD9C5C3007A709A /* Build configuration list for PBXProject "Notflix" */;
+			buildConfigurationList = 327FB4A82DD9C5C3007A709A /* Build configuration list for PBXProject "Netflix" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -209,9 +209,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				327FB4AC2DD9C5C3007A709A /* Notflix */,
-				327FB4BA2DD9C5C5007A709A /* NotflixTests */,
-				327FB4C42DD9C5C5007A709A /* NotflixUITests */,
+				327FB4AC2DD9C5C3007A709A /* Netflix */,
+				327FB4BA2DD9C5C5007A709A /* NetflixTests */,
+				327FB4C42DD9C5C5007A709A /* NetflixUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -267,12 +267,12 @@
 /* Begin PBXTargetDependency section */
 		327FB4BD2DD9C5C5007A709A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 327FB4AC2DD9C5C3007A709A /* Notflix */;
+			target = 327FB4AC2DD9C5C3007A709A /* Netflix */;
 			targetProxy = 327FB4BC2DD9C5C5007A709A /* PBXContainerItemProxy */;
 		};
 		327FB4C72DD9C5C5007A709A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 327FB4AC2DD9C5C3007A709A /* Notflix */;
+			target = 327FB4AC2DD9C5C3007A709A /* Netflix */;
 			targetProxy = 327FB4C62DD9C5C5007A709A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -403,7 +403,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Notflix/Notflix.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Netflix/Netflix.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
@@ -428,7 +428,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = shoonya.Notflix;
+				PRODUCT_BUNDLE_IDENTIFIER = shoonya.Netflix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
@@ -445,7 +445,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Notflix/Notflix.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Netflix/Netflix.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
@@ -470,7 +470,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = shoonya.Notflix;
+				PRODUCT_BUNDLE_IDENTIFIER = shoonya.Netflix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
@@ -494,14 +494,14 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
 				MACOSX_DEPLOYMENT_TARGET = 15.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = shoonya.NotflixTests;
+				PRODUCT_BUNDLE_IDENTIFIER = shoonya.NetflixTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Notflix.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Notflix";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Netflix.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Netflix";
 				XROS_DEPLOYMENT_TARGET = 2.4;
 			};
 			name = Debug;
@@ -518,14 +518,14 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
 				MACOSX_DEPLOYMENT_TARGET = 15.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = shoonya.NotflixTests;
+				PRODUCT_BUNDLE_IDENTIFIER = shoonya.NetflixTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Notflix.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Notflix";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Netflix.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Netflix";
 				XROS_DEPLOYMENT_TARGET = 2.4;
 			};
 			name = Release;
@@ -541,14 +541,14 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
 				MACOSX_DEPLOYMENT_TARGET = 15.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = shoonya.NotflixUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = shoonya.NetflixUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_TARGET_NAME = Notflix;
+				TEST_TARGET_NAME = Netflix;
 				XROS_DEPLOYMENT_TARGET = 2.4;
 			};
 			name = Debug;
@@ -564,14 +564,14 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
 				MACOSX_DEPLOYMENT_TARGET = 15.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = shoonya.NotflixUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = shoonya.NetflixUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_TARGET_NAME = Notflix;
+				TEST_TARGET_NAME = Netflix;
 				XROS_DEPLOYMENT_TARGET = 2.4;
 			};
 			name = Release;
@@ -579,7 +579,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		327FB4A82DD9C5C3007A709A /* Build configuration list for PBXProject "Notflix" */ = {
+		327FB4A82DD9C5C3007A709A /* Build configuration list for PBXProject "Netflix" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				327FB4CD2DD9C5C5007A709A /* Debug */,
@@ -588,7 +588,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		327FB4CF2DD9C5C5007A709A /* Build configuration list for PBXNativeTarget "Notflix" */ = {
+		327FB4CF2DD9C5C5007A709A /* Build configuration list for PBXNativeTarget "Netflix" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				327FB4D02DD9C5C5007A709A /* Debug */,
@@ -597,7 +597,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		327FB4D22DD9C5C5007A709A /* Build configuration list for PBXNativeTarget "NotflixTests" */ = {
+		327FB4D22DD9C5C5007A709A /* Build configuration list for PBXNativeTarget "NetflixTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				327FB4D32DD9C5C5007A709A /* Debug */,
@@ -606,7 +606,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		327FB4D52DD9C5C5007A709A /* Build configuration list for PBXNativeTarget "NotflixUITests" */ = {
+		327FB4D52DD9C5C5007A709A /* Build configuration list for PBXNativeTarget "NetflixUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				327FB4D62DD9C5C5007A709A /* Debug */,

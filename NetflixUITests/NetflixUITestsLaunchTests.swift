@@ -1,13 +1,13 @@
 //
-//  NotflixUITestsLaunchTests.swift
-//  NotflixUITests
+//  NetflixUITestsLaunchTests.swift
+//  NetflixUITests
 //
 //  Created by Vikas Raj Yadav on 18/05/25.
 //
 
 import XCTest
 
-final class NotflixUITestsLaunchTests: XCTestCase {
+final class NetflixUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

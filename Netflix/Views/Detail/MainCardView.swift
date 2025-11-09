@@ -1,13 +1,13 @@
 //
-//  mainCardView.swift
-//  Notflix
+//  MainCardView.swift
+//  Netflix
 //
 //  Created by Vikas Raj Yadav on 26/05/25.
 //
 
 import SwiftUI
 
-struct mainCardView: View {
+struct MainCardView: View {
     var body: some View {
         ScrollView() {
             VStack(alignment: .leading) {
@@ -81,7 +81,7 @@ struct mainCardView: View {
                     
                     
                     VStack (alignment: .leading, spacing: 7) {
-                        Text("Brilliant yet awkward 9-year-old Sheldon Cooper Lands in high school where his smarts leave everyone stumped in this “The Big Bang Theory” spinoff.")
+                        Text("Brilliant yet awkward 9-year-old Sheldon Cooper Lands in high school where his smarts leave everyone stumped in this "The Big Bang Theory" spinoff.")
                             .font(.system(size: 13, weight: .medium))
                             .foregroundColor(.white)
                         Text("Cast: Iain Armitage, Zoe Perry, Lance Barber ... moree")
@@ -210,5 +210,6 @@ struct mainCardView: View {
 }
 
 #Preview {
-    mainCardView()
+    MainCardView()
 }
+

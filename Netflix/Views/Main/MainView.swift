@@ -15,11 +15,11 @@ struct MainView: View {
             ZStack {
                 switch selectedTab {
                 case .home:
-                    home()
+                    HomeView()
                 case .newHot:
-                    hot()
+                    HotView()
                 case .myNetflix:
-                    profile()
+                    ProfileView()
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -89,3 +89,4 @@ struct MainView: View {
 #Preview {
     MainView()
 }
+
