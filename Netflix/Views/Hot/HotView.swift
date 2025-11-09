@@ -103,8 +103,10 @@ struct HotHeader: View {
                 }
                 .padding(.leading, 10)
             }
+            .padding(.bottom, 8)
         }
         .frame(height: 80)
+        .background(Color.black)
         .zIndex(1)
     }
 }

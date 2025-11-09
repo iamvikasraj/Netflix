@@ -6,7 +6,6 @@ struct ProfileView: View {
             ZStack(alignment: .top) {
                 Header(pageName: "My Netflix", r1: "share", r2: "search", r3: "menu")
                     .zIndex(1)
-                    .background(Color.black)
                 
                 // Main content
                 ScrollView {

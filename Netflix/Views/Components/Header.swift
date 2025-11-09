@@ -27,7 +27,9 @@ struct Header: View {
                 }
                 .padding(.horizontal, 10)
             }
+            .padding(.bottom, 8)
         }
+        .background(Color.black)
     }
 }
 

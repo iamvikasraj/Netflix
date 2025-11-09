@@ -1,30 +1,28 @@
 import SwiftUI
 
 struct SmallCard: View {
+    let imageURL: URL?
+    let title: String
+    let genre: String
+    
+    init(imageURL: URL? = nil, title: String = "Movie Title", genre: String = "Action") {
+        self.imageURL = imageURL
+        self.title = title
+        self.genre = genre
+    }
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            ZStack {
-                Image("gamecover")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 110, height: 110)
-                    .clipped()
-            }
-            .frame(width: 110, height: 110)
-            .background(Color.gray.opacity(0.3))
-            .cornerRadius(16)
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
-            )
+            AsyncImageCard(imageURL: imageURL, width: 110, height: 110, cornerRadius: 16)
     
             VStack(alignment: .leading, spacing: 2) {
-                Text("Street Fighter IV CE")
+                Text(title)
                     .font(.system(size: 12, weight: .bold))
                   .foregroundColor(.white)
                   .frame(width: 110, alignment: .topLeading)
+                  .lineLimit(2)
                 
-                Text("Action")
+                Text(genre)
                 .font(.system(size: 12, weight: .regular))
                   .foregroundColor(Color(red: 0.65, green: 0.65, blue: 0.65))
                   .frame(maxWidth: .infinity, alignment: .topLeading)
@@ -75,7 +73,8 @@ struct BigCard: View {
 }
 
 struct TopTenCard: View {
-   var rank: Int
+    var rank: Int
+    var imageURL: URL?
     
     var body: some View {
         HStack (alignment: .bottom, spacing: -28) {
@@ -88,19 +87,35 @@ struct TopTenCard: View {
             .frame(height: 100)
             .foregroundStyle(.white)
             VStack(alignment: .leading, spacing: 6) {
-                VStack {
-                    // Game content here
+                AsyncImage(url: imageURL) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                            .frame(width: 110, height: 159)
+                            .background(Color.gray.opacity(0.3))
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 110, height: 159)
+                            .clipped()
+                    case .failure:
+                        Image(systemName: "photo")
+                            .foregroundColor(.gray)
+                            .frame(width: 110, height: 159)
+                            .background(Color.gray.opacity(0.3))
+                    @unknown default:
+                        EmptyView()
+                    }
                 }
-                .frame(width: 110, height: 159)
-                .background(.gray)
-                .cornerRadius(4)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 16)
-                        .inset(by: 0)
-                        .stroke(Color(red: 0.16, green: 0.16, blue: 0.16).opacity(0.2), lineWidth: 1)
-                )
-                
             }
+            .frame(width: 110, height: 159)
+            .background(Color.gray.opacity(0.3))
+            .cornerRadius(4)
+            .overlay(
+                RoundedRectangle(cornerRadius: 4)
+                    .stroke(Color(red: 0.16, green: 0.16, blue: 0.16).opacity(0.2), lineWidth: 1)
+            )
         }
     }
 }
