@@ -4,7 +4,7 @@ struct SmallCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             ZStack {
-                Image("gamecover")
+                Image("game_0")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 110, height: 110)
@@ -17,6 +17,7 @@ struct SmallCard: View {
                 RoundedRectangle(cornerRadius: 16)
                     .stroke(Color.white.opacity(0.1), lineWidth: 1)
             )
+            .drawingGroup() // Rasterize for better scroll performance
     
             VStack(alignment: .leading, spacing: 2) {
                 Text("Street Fighter IV CE")
@@ -37,6 +38,9 @@ struct SmallCard: View {
 
 struct MediumCard: View {
     var imageName: String
+    var contentId: String? = nil
+    var contentType: ContentType? = nil
+    var onTap: (() -> Void)? = nil
     
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -55,7 +59,10 @@ struct MediumCard: View {
                     .inset(by: 0)
                     .stroke(Color(red: 0.16, green: 0.16, blue: 0.16).opacity(0.2), lineWidth: 1)
             )
-            
+            .drawingGroup() // Rasterize for better scroll performance
+        }
+        .onTapGesture {
+            onTap?()
         }
     }
 }
@@ -75,32 +82,33 @@ struct BigCard: View {
 }
 
 struct TopTenCard: View {
-   var rank: Int
+    var rank: Int
+    var imageName: String
     
     var body: some View {
-        HStack (alignment: .bottom, spacing: -28) {
+        HStack(alignment: .bottom, spacing: -28) {
             Text("\(rank)")
-            .font(
-            Font.custom("Inter", size: 132)
-            .weight(.heavy)
-            )
-            .kerning(-3)
-            .frame(height: 100)
-            .foregroundStyle(.white)
+                .font(Font.custom("Inter", size: 132).weight(.heavy))
+                .kerning(-3)
+                .frame(height: 100)
+                .foregroundStyle(.white)
+            
             VStack(alignment: .leading, spacing: 6) {
-                VStack {
-                    // Game content here
-                }
-                .frame(width: 110, height: 159)
-                .background(.gray)
-                .cornerRadius(4)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 16)
-                        .inset(by: 0)
-                        .stroke(Color(red: 0.16, green: 0.16, blue: 0.16).opacity(0.2), lineWidth: 1)
-                )
-                
+                Image(imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 110, height: 159)
+                    .clipped()
             }
+            .frame(width: 110, height: 159)
+            .background(.gray)
+            .cornerRadius(4)
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .inset(by: 0)
+                    .stroke(Color(red: 0.16, green: 0.16, blue: 0.16).opacity(0.2), lineWidth: 1)
+            )
+            .drawingGroup()
         }
     }
 }
@@ -166,5 +174,33 @@ struct NotificationCard: View {
         .padding(0)
         .frame(width: 370, alignment: .leading)
     }
+}
+
+#Preview("SmallCard") {
+    SmallCard()
+        .preferredColorScheme(.dark)
+        .background(Color.black)
+        .padding()
+}
+
+#Preview("MediumCard") {
+    MediumCard(imageName: "witcher")
+        .preferredColorScheme(.dark)
+        .background(Color.black)
+        .padding()
+}
+
+#Preview("TopTenCard") {
+    TopTenCard(rank: 1, imageName: "witcher")
+        .preferredColorScheme(.dark)
+        .background(Color.black)
+        .padding()
+}
+
+#Preview("NewCard") {
+    NewCard()
+        .preferredColorScheme(.dark)
+        .background(Color.black)
+        .padding()
 }
 
