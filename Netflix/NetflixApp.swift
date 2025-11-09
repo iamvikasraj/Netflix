@@ -12,6 +12,7 @@ struct NetflixApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
+                .background(Color.black)
         }
     }
 }
