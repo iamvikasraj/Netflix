@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct NetflixApp: App {
+    @StateObject private var navigationCoordinator = NavigationCoordinator()
+    
     var body: some Scene {
         WindowGroup {
             MainView()
+                .environmentObject(navigationCoordinator)
         }
     }
 }
