@@ -1,93 +1,112 @@
 import SwiftUI
-import RiveRuntime
+
 
 struct HomeView: View {
     @State var isMainshowtapped: Bool = false
+    @State private var scrollOffset: CGFloat = 0
     
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .top) {
                 VStack(spacing:12) {
-                    Header(pageName: "For Rocky", r1: "share", r2: "download", r3: "search")
+                    Header(pageName: "For Vikas Raj", r1: "share", r2: "download", r3: "search")
                     HeaderLabel()
                         .padding(.bottom, 8)
+                        .opacity(max(0, 1.0 - scrollOffset / 100))
+                        .scaleEffect(max(0, 1.0 - scrollOffset / 100))
+                            
                }.zIndex(1)
                 
                 
                 // Main content
                 ScrollView() {
                     VStack(spacing: 16) {
+                        GeometryReader { scrollGeometry in
+                            Color.clear
+                                .preference(key: ScrollOffsetPreferenceKey.self, value: scrollGeometry.frame(in: .global).minY)
+                        }
+                        .frame(height: 0)
+                        
                         Spacer().frame(height: 160)
-                        VStack {
-                            Spacer()
-                            HStack {
-                                let btn1: String = "Play"
-                                let btn2: String = "My List"
-                                
-                                // Play Button
-                                Button(action: {
+                        ZStack {
+                            // Background image - tappable to open MainCardView
+                            Image("dmc")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 345, height: 486)
+                                .clipped()
+                                .cornerRadius(16)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
                                     // Add haptic feedback
                                     let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
                                     impactFeedback.impactOccurred()
                                     
-                                    // Add your play action here
-                                    print("Play button tapped")
-                                }) {
-                                    HStack(alignment: .center, spacing: 10) {
-                                        Image("played")
-                                            .frame(width: 22, height: 22)
-                                        
-                                        Text(btn1)
-                                            .font(.system(size: 15, weight: .semibold))
-                                            .foregroundColor(.white)
-                                    }
-                                    .padding(.horizontal, 0)
-                                    .padding(.vertical, 9)
-                                    .frame(width: min(geometry.size.width * 0.4, 151), height: 42, alignment: .center)
-                                    .glassEffect()
-                                    .cornerRadius(4)
+                                    // Show MainCardView
+                                    isMainshowtapped = true
                                 }
-                                .buttonStyle(PlainButtonStyle()) // Removes default button styling
-                                
-                                // My List Button
-                                Button(action: {
-                                    // Add haptic feedback
-                                    let impactFeedback = UIImpactFeedbackGenerator(style: .light)
-                                    impactFeedback.impactOccurred()
+                            
+                            // Buttons overlay - positioned at bottom
+                            VStack {
+                                Spacer()
+                                HStack {
+                                    let btn1: String = "Play"
+                                    let btn2: String = "My List"
                                     
-                                    // Add your my list action here
-                                    print("My List button tapped")
-                                }) {
-                                    HStack(alignment: .center, spacing: 10) {
-                                        Image("mylist")
-                                            .frame(width: 22, height: 22)
+                                    // Play Button
+                                    Button(action: {
+                                        // Add haptic feedback
+                                        let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                                        impactFeedback.impactOccurred()
                                         
-                                        Text(btn2)
-                                            .font(.system(size: 15, weight: .semibold))
-                                            .foregroundColor(.white)
+                                        // Add your play action here
+                                        print("Play button tapped")
+                                    }) {
+                                        HStack(alignment: .center, spacing: 10) {
+                                            Image("played")
+                                                .frame(width: 22, height: 22)
+                                            
+                                            Text(btn1)
+                                                .font(.system(size: 15, weight: .semibold))
+                                                .foregroundColor(.white)
+                                        }
+                                        .padding(.horizontal, 0)
+                                        .padding(.vertical, 9)
+                                        .frame(width: min(geometry.size.width * 0.4, 151), height: 42, alignment: .center)
+                                        .glassEffect()
+                                        .cornerRadius(4)
                                     }
-                                    .padding(.horizontal, 0)
-                                    .padding(.vertical, 9)
-                                    .frame(width: min(geometry.size.width * 0.4, 151), height: 42, alignment: .center)
-                                    .glassEffect()
+                                    .buttonStyle(PlainButtonStyle())
+                                    
+                                    // My List Button
+                                    Button(action: {
+                                        // Add haptic feedback
+                                        let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+                                        impactFeedback.impactOccurred()
+                                        
+                                        // Add your my list action here
+                                        print("My List button tapped")
+                                    }) {
+                                        HStack(alignment: .center, spacing: 10) {
+                                            Image("mylist")
+                                                .frame(width: 22, height: 22)
+                                            
+                                            Text(btn2)
+                                                .font(.system(size: 15, weight: .semibold))
+                                                .foregroundColor(.white)
+                                        }
+                                        .padding(.horizontal, 0)
+                                        .padding(.vertical, 9)
+                                        .frame(width: min(geometry.size.width * 0.4, 151), height: 42, alignment: .center)
+                                        .glassEffect()
+                                    }
+                                    .buttonStyle(PlainButtonStyle())
                                 }
-                                .buttonStyle(PlainButtonStyle()) // Removes default button styling
+                                .padding(.bottom, 16)
+                                .padding(.top, 16)
                             }
-                            .padding(.bottom, 16)
-                            .padding(.top, 16)
+                            .frame(width: 345, height: 486)
                         }
-                        .frame(width: 345, height: 486)
-                        .background(
-                            ZStack {
-                                // Background image
-                                Image("hero") // Replace with your image name
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 345, height: 486)
-                            }
-                        )
-                        .clipped()
-                        .cornerRadius(16)
                         
                         // Mobile Games section
                         SmallCardSection()
@@ -142,12 +161,30 @@ struct HomeView: View {
                         
                     }
                 }
+                .coordinateSpace(name: "scroll")
+                .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
+                    scrollOffset = max(0, -value)
+                }
                 .scrollIndicators(.hidden)
                 .ignoresSafeArea(.all)
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 .background(.black)
             }
         }
+        .sheet(isPresented: $isMainshowtapped) {
+            MainCardView()
+                .presentationDetents([.large])
+                .presentationDragIndicator(.hidden)
+                .presentationBackground(.black)
+        }
+    }
+}
+
+// PreferenceKey to track scroll offset
+struct ScrollOffsetPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
     }
 }
 

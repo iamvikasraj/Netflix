@@ -20,8 +20,19 @@ struct Header: View {
                     
                     HStack(spacing: 22) {
                         ForEach([r1, r2, r3], id: \.self) { imageName in
-                            Image(imageName)
-                            .frame(width: 22, height: 22)
+                            if imageName == "download" {
+                                Button(action: {
+                                    // TODO: Handle header download action
+                                    print("Header download tapped")
+                                }) {
+                                    Image(imageName)
+                                        .frame(width: 22, height: 22)
+                                }
+                                .buttonStyle(.plain)
+                            } else if !imageName.isEmpty {
+                                Image(imageName)
+                                    .frame(width: 22, height: 22)
+                            }
                         }
                     }
                 }

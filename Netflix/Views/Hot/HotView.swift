@@ -38,7 +38,7 @@ struct HotView: View {
 }
 
 #Preview {
-    MainView()
+    HotView()
 }
 
 struct HotHeader: View {
@@ -55,8 +55,19 @@ struct HotHeader: View {
                     
                     HStack(spacing: 22) {
                         ForEach(["share", "download", "search"], id: \.self) { imageName in
-                            Image(imageName)
-                                .frame(width: 22, height: 22)
+                            if imageName == "download" {
+                                Button(action: {
+                                    // TODO: Handle hot header download action
+                                    print("Hot header download tapped")
+                                }) {
+                                    Image(imageName)
+                                        .frame(width: 22, height: 22)
+                                }
+                                .buttonStyle(.plain)
+                            } else {
+                                Image(imageName)
+                                    .frame(width: 22, height: 22)
+                            }
                         }
                     }
                 }

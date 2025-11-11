@@ -85,3 +85,16 @@ struct ContentCard: View {
     }
 }
 
+
+#Preview {
+    // Use a concrete HomeSection for preview
+    ContentSectionView(
+        section: HomeSection(id: "preview-trending",
+                             title: "Trending Now",
+                             category: .trending,
+                             contentType: .movies)
+    )
+    .frame(maxHeight:.infinity)
+    .background(.black)
+    .ignoresSafeArea()
+}

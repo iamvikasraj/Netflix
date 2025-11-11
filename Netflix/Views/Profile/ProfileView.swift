@@ -55,6 +55,6 @@ struct ProfileView: View {
 }
 
 #Preview {
-    MainView()
+    ProfileView()
 }
 
