@@ -3,11 +3,16 @@ import SwiftUI
 struct NewCard: View {
     var body: some View {
         HStack(alignment: .top, spacing: 10) {
-            ZStack {}
+            ZStack {
+//             Image("dmc")
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fit)
+            }
                 .frame(maxWidth: .infinity, minHeight: 211, maxHeight: 211)
                 .background(Color(red: 0.1, green: 0.1, blue: 0.1))
                 .cornerRadius(12)
         }
+        
         .padding(0)
         .frame(width: 361, height: 332, alignment: .top)
         .cornerRadius(12)
