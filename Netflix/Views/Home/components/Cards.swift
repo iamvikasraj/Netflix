@@ -2,19 +2,36 @@ import SwiftUI
 
 struct SmallCard: View {
     let imageURL: URL?
+    // Local asset name for a fixed image (e.g. the mobile game artwork). When
+    // set it takes precedence over `imageURL` so these thumbnails never change.
+    let imageName: String?
     let title: String
     let genre: String
-    
-    init(imageURL: URL? = nil, title: String = "Movie Title", genre: String = "Action") {
+
+    init(imageURL: URL? = nil, imageName: String? = nil, title: String = "Movie Title", genre: String = "Action") {
         self.imageURL = imageURL
+        self.imageName = imageName
         self.title = title
         self.genre = genre
     }
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            AsyncImageCard(imageURL: imageURL, width: 110, height: 110, cornerRadius: 16)
-    
+            if let imageName {
+                Image(imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 110, height: 110)
+                    .clipped()
+                    .cornerRadius(16)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(Color(red: 0.16, green: 0.16, blue: 0.16).opacity(0.2), lineWidth: 1)
+                    )
+            } else {
+                AsyncImageCard(imageURL: imageURL, width: 110, height: 110, cornerRadius: 16)
+            }
+
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .font(.system(size: 12, weight: .bold))
@@ -77,15 +94,14 @@ struct TopTenCard: View {
     var imageURL: URL?
     
     var body: some View {
-        HStack (alignment: .bottom, spacing: -28) {
-            Text("\(rank)")
-            .font(
-            Font.custom("Inter", size: 132)
-            .weight(.heavy)
-            )
-            .kerning(-3)
-            .frame(height: 100)
-            .foregroundStyle(.white)
+        HStack (alignment: .bottom, spacing: -26) {
+            // Rank glyph SVG per position; falls back to "1" for ranks whose
+            // digit asset isn't in yet. Sized by height so glyphs with different
+            // viewBox widths still render at a consistent height.
+            Image(uiImage: UIImage(named: "rank\(rank)") ?? UIImage(named: "rank1") ?? UIImage())
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(height: 110)
             VStack(alignment: .leading, spacing: 6) {
                 AsyncImage(url: imageURL) { phase in
                     switch phase {

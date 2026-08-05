@@ -1,25 +1,28 @@
 import SwiftUI
 
 struct HotView: View {
+    @State private var scrollOffset: CGFloat = 0
+
     var body: some View {
         GeometryReader { geometry in
-            
-            HotHeader()
-            .zIndex(1)
-            
+            // Collapse progress: 0 = fully expanded, 1 = fully collapsed
+            let collapse = min(max(scrollOffset / 120, 0), 1)
             ZStack(alignment: .top) {
+                HotHeader(backgroundProgress: collapse)
+                    .zIndex(1)
+
                 ScrollView {
                     VStack(spacing: 16) {
-                     
+
                         NewCard()
-                        
+
                         NewCard()
-                        
+
                         NewCard()
-                        
+
                         // Mobile Games section
-                        
-                        
+
+
                         // Add extra spacing at the bottom to account for the nav bar
                         Spacer()
                             .frame(height: 90)
@@ -27,6 +30,11 @@ struct HotView: View {
                     .padding(.top, 160)
                     .padding(.vertical, 16)
                     .padding(.horizontal, 16)
+                }
+                .onScrollGeometryChange(for: CGFloat.self) { proxy in
+                    proxy.contentOffset.y
+                } action: { _, newValue in
+                    scrollOffset = max(0, newValue)
                 }
                 .scrollIndicators(.hidden)
                 .ignoresSafeArea(.all)
@@ -42,6 +50,8 @@ struct HotView: View {
 }
 
 struct HotHeader: View {
+    var backgroundProgress: Double = 0
+
     var body: some View {
         ZStack {
             VStack(spacing: 12) {
@@ -85,7 +95,11 @@ struct HotHeader: View {
                         .padding(.trailing, 15)
                         .padding(.vertical, 8)
                         .frame(height: 34, alignment: .center)
-                        .glassEffect(in: .rect(cornerRadius: 16.0))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 40)
+                                .inset(by: 0.5)
+                                .stroke(Color(red: 0.47, green: 0.39, blue: 0.38), lineWidth: 1)
+                        )
                         
                         HStack(alignment: .center, spacing: 10) {
                             Text("🔥 Everyone's Watching")
@@ -96,7 +110,11 @@ struct HotHeader: View {
                         .padding(.trailing, 15)
                         .padding(.vertical, 8)
                         .frame(height: 34, alignment: .center)
-                        .glassEffect(in: .rect(cornerRadius: 16.0))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 40)
+                                .inset(by: 0.5)
+                                .stroke(Color(red: 0.47, green: 0.39, blue: 0.38), lineWidth: 1)
+                        )
                         
                         HStack(alignment: .center, spacing: 10) {
                             Text("Categories")
@@ -107,17 +125,21 @@ struct HotHeader: View {
                         .padding(.trailing, 15)
                         .padding(.vertical, 8)
                         .frame(height: 34, alignment: .center)
-                        .glassEffect(in: .rect(cornerRadius: 16.0))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 40)
+                                .inset(by: 0.5)
+                                .stroke(Color(red: 0.47, green: 0.39, blue: 0.38), lineWidth: 1)
+                        )
                     }
                     
                     Spacer()
                 }
-                .padding(.leading, 10)
+                .frame(height: 34)
+                .padding(.horizontal, 10)
             }
             .padding(.bottom, 8)
         }
-        .frame(height: 80)
-        .background(Color.black)
+        .scrollHeaderBackground(progress: backgroundProgress)
         .zIndex(1)
     }
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Isolation_Mode" data-name="Isolation Mode" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72.79 104.41">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #111;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <path id="two" class="cls-1" d="M1.15,31.93h21.63s1.01-10.81,15.97-11.24,23.72,14.79,0,32.53C21.09,68.77,1.99,85.67,1.99,85.67v17.74h63.2v-19.6l-33.02,1s39.44-28.54,39.61-43.41c.17-14.87-1.86-40.89-34.13-40.39C5.37,1.51,1.15,31.93,1.15,31.93Z"/>
+</svg>

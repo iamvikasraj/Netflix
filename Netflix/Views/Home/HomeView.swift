@@ -2,31 +2,69 @@ import SwiftUI
 
 
 struct HomeView: View {
+    // Owned by MainView so the expanded category menu can cover the tab bar too.
+    @Binding var showCategories: Bool
     @State var isMainshowtapped: Bool = false
     @State private var scrollOffset: CGFloat = 0
-    
+    // Ambient color extracted from the featured hero art. Starts black and
+    // cross-fades in once the image has been sampled.
+    @State private var ambientColor: Color = .black
+    // Name of the hero asset the ambient tint is derived from.
+    private let heroImageName = "dmc"
+
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .top) {
-                VStack(spacing:12) {
-                    Header(pageName: "For Vikas Raj", r1: "share", r2: "download", r3: "search")
-                    HeaderLabel()
+                // Collapse progress: 0 = fully expanded, 1 = fully collapsed
+                let collapse = min(max(scrollOffset / 120, 0), 1)
+                // Ambient backdrop fades out as the user scrolls past the hero.
+                let ambientOpacity = 1 - min(max(scrollOffset / 300, 0), 1)
+
+                // Ambient tint behind the hero: the featured art's color glows
+                // from the top and dissolves into black further down the page.
+                LinearGradient(
+                    gradient: Gradient(stops: [
+                        .init(color: ambientColor, location: 0.0),
+                        .init(color: ambientColor, location: 0.35),
+                        .init(color: ambientColor.opacity(0), location: 0.85)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .frame(height: 660)
+                .frame(maxWidth: .infinity, alignment: .top)
+                .opacity(ambientOpacity)
+                .ignoresSafeArea()
+                .allowsHitTesting(false)
+                VStack(spacing: 12 - 4 * collapse) {
+                    Header(pageName: "For Vikas Raj", r1: "share", r2: "download", r3: "search", background: AnyShapeStyle(.clear))
+                    // Category chips are part of the header: as the user scrolls
+                    // they scale down, move up and collapse their height so the
+                    // whole (opaque) header shrinks and content passes underneath.
+                    HeaderLabel(
+                        onCategories: {
+                            withAnimation(.spring(response: 0.38, dampingFraction: 0.9)) {
+                                showCategories = true
+                            }
+                        },
+                        categoriesOpen: showCategories
+                    )
                         .padding(.bottom, 8)
-                        .opacity(max(0, 1.0 - scrollOffset / 100))
-                        .scaleEffect(max(0, 1.0 - scrollOffset / 100))
-                            
-               }.zIndex(1)
+                        .scaleEffect(1 - 0.35 * collapse, anchor: .top)
+                        .opacity(1 - collapse)
+                        .offset(y: -12 * collapse)
+                        .frame(height: 42 * (1 - collapse), alignment: .top)
+                        .clipped()
+               }
+               // Transparent at rest so the ambient tint flows behind the title;
+               // blurs into a translucent dark material as the user scrolls up.
+               .scrollHeaderBackground(progress: collapse)
+               .zIndex(1)
                 
                 
                 // Main content
                 ScrollView() {
                     VStack(spacing: 16) {
-                        GeometryReader { scrollGeometry in
-                            Color.clear
-                                .preference(key: ScrollOffsetPreferenceKey.self, value: scrollGeometry.frame(in: .global).minY)
-                        }
-                        .frame(height: 0)
-                        
                         Spacer().frame(height: 160)
                         ZStack {
                             // Background image - tappable to open MainCardView
@@ -63,17 +101,17 @@ struct HomeView: View {
                                         print("Play button tapped")
                                     }) {
                                         HStack(alignment: .center, spacing: 10) {
-                                            Image("played")
+                                            Image("play")
                                                 .frame(width: 22, height: 22)
-                                            
+
                                             Text(btn1)
                                                 .font(.system(size: 15, weight: .semibold))
-                                                .foregroundColor(.white)
+                                                .foregroundColor(.black)
                                         }
                                         .padding(.horizontal, 0)
                                         .padding(.vertical, 9)
                                         .frame(width: min(geometry.size.width * 0.4, 151), height: 42, alignment: .center)
-                                        .glassEffect()
+                                        .background(.white)
                                         .cornerRadius(4)
                                     }
                                     .buttonStyle(PlainButtonStyle())
@@ -98,7 +136,8 @@ struct HomeView: View {
                                         .padding(.horizontal, 0)
                                         .padding(.vertical, 9)
                                         .frame(width: min(geometry.size.width * 0.4, 151), height: 42, alignment: .center)
-                                        .glassEffect()
+                                        .background(Color(red: 0.25, green: 0.23, blue: 0.22))
+                                        .cornerRadius(4)
                                     }
                                     .buttonStyle(PlainButtonStyle())
                                 }
@@ -161,15 +200,19 @@ struct HomeView: View {
                         
                     }
                 }
-                .coordinateSpace(name: "scroll")
-                .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
-                    scrollOffset = max(0, -value)
+                .onScrollGeometryChange(for: CGFloat.self) { proxy in
+                    proxy.contentOffset.y
+                } action: { _, newValue in
+                    scrollOffset = max(0, newValue)
                 }
                 .scrollIndicators(.hidden)
                 .ignoresSafeArea(.all)
                 .frame(width: geometry.size.width, height: geometry.size.height)
-                .background(.black)
             }
+            .background(Color.black)
+        }
+        .task {
+            await loadAmbientColor()
         }
         .sheet(isPresented: $isMainshowtapped) {
             MainCardView()
@@ -178,13 +221,19 @@ struct HomeView: View {
                 .presentationBackground(.black)
         }
     }
-}
 
-// PreferenceKey to track scroll offset
-struct ScrollOffsetPreferenceKey: PreferenceKey {
-    static var defaultValue: CGFloat = 0
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = nextValue()
+    /// Samples the hero artwork off the main thread and cross-fades the
+    /// extracted ambient color into the backdrop.
+    private func loadAmbientColor() async {
+        let name = heroImageName
+        let sampled: UIColor? = await Task.detached(priority: .utility) {
+            UIImage(named: name)?.ambientColor
+        }.value
+
+        guard let sampled else { return }
+        withAnimation(.easeInOut(duration: 0.7)) {
+            ambientColor = Color(sampled)
+        }
     }
 }
 

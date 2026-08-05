@@ -2,13 +2,15 @@ import SwiftUI
 
 struct MainView: View {
     @State private var selectedTab = 0
-    
+    // Expanded category menu lives here so it can cover the tab bar as well.
+    @State private var showCategories = false
+
     var body: some View {
         ZStack(alignment: .bottom) {
             // Content views
             Group {
                 if selectedTab == 0 {
-                    HomeView()
+                    HomeView(showCategories: $showCategories)
                 } else if selectedTab == 1 {
                     HotView()
                 } else {
@@ -16,9 +18,30 @@ struct MainView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            
+
             // Custom Tab Bar
             CustomTabBar(selectedTab: $selectedTab)
+        }
+        .overlay {
+            // Full-screen category browser, expanded from the Home "Categories"
+            // chip using the same animated-overlay pattern as the Morsel menu.
+            if showCategories {
+                CategoriesMenu(
+                    categories: CategoriesMenu.defaultCategories,
+                    onSelect: { _ in
+                        withAnimation(.spring(response: 0.35, dampingFraction: 0.9)) {
+                            showCategories = false
+                        }
+                    },
+                    onClose: {
+                        withAnimation(.spring(response: 0.35, dampingFraction: 0.9)) {
+                            showCategories = false
+                        }
+                    }
+                )
+                .transition(.opacity)
+                .zIndex(1)
+            }
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
     }
@@ -56,14 +79,10 @@ struct CustomTabBar: View {
         }
         .padding(.top, 16)
         .frame(height: 52)
-        .background(.black).opacity(0.99)
-        .overlay(
-            Rectangle()
-                .frame(height: 0.5)
-                .foregroundColor(Color.gray.opacity(0.3)),
-            alignment: .top
-        )
-        
+        // Translucent dark blur so content faintly shows through, matching the
+        // iOS Netflix tab bar (a subtle blur, not a solid slab).
+        .background(.ultraThinMaterial)
+        .environment(\.colorScheme, .dark)
     }
 }
 

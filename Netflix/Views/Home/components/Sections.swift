@@ -1,9 +1,22 @@
 import SwiftUI
 
 struct SmallCardSection: View {
-    @State private var movies: [TMDBMovie] = []
-    @State private var isLoading = true
-    
+    // Fixed mobile-game artwork bundled with the app. These are intentionally
+    // static local assets so the row never changes between launches.
+    private let games: [(image: String, title: String, genre: String)] = [
+        ("game_0", "Football Manager", "Sports"),
+        ("game_1", "GTA: San Andreas", "Action"),
+        ("game_2", "Stranger Things", "Adventure"),
+        ("game_3", "Monument Valley", "Puzzle"),
+        ("game_4", "Dead Cells", "Action"),
+        ("game_5", "Oxenfree", "Adventure"),
+        ("game_6", "Into the Breach", "Strategy"),
+        ("game_7", "Hades", "Roguelike"),
+        ("game_8", "Poinpy", "Arcade"),
+        ("game_9", "Reigns", "Card"),
+        ("game_10", "Immortality", "Mystery")
+    ]
+
     var body: some View {
         VStack {
             HStack(alignment: .center) {
@@ -11,33 +24,25 @@ struct SmallCardSection: View {
                     .font(.system(size: 17, weight: .semibold))
                     .kerning(0.34)
                     .foregroundColor(.white)
-                
+
                 Spacer()
-                
+
                 Text("My List")
                     .font(.system(size: 16, weight: .regular))
                     .kerning(0.34)
                     .foregroundColor(.white)
-                
+
             }
             .padding(.horizontal, 16)
-            
+
             ScrollView(.horizontal) {
                 HStack(spacing: 10) {
-                    if isLoading {
-                        ForEach(0..<5, id: \.self) { _ in
-                            SmallCard()
-                        }
-                    } else {
-                        ForEach(movies.prefix(5)) { movie in
-                            SmallCard(
-                                imageURL: movie.posterPath.flatMap { path in
-                                    !path.isEmpty ? TMDBService.shared.posterURL(path: path) : nil
-                                },
-                                title: movie.title,
-                                genre: "Action" // You can extract genre from movie data if available
-                            )
-                        }
+                    ForEach(games, id: \.image) { game in
+                        SmallCard(
+                            imageName: game.image,
+                            title: game.title,
+                            genre: game.genre
+                        )
                     }
                 }
                 .padding(.vertical, 10)
@@ -45,20 +50,6 @@ struct SmallCardSection: View {
                 .padding(.trailing, 16)
             }
             .scrollIndicators(.hidden)
-        }
-        .task {
-            await loadMovies()
-        }
-    }
-    
-    private func loadMovies() async {
-        isLoading = true
-        do {
-            movies = try await TMDBService.shared.fetchPopularMovies()
-            isLoading = false
-        } catch {
-            print("❌ Error loading movies for SmallCardSection: \(error.localizedDescription)")
-            isLoading = false
         }
     }
 }
@@ -409,6 +400,8 @@ struct DownloadsSection: View {
 
 struct ProfileCardSection: View {
     var title: String
+    var category: ContentCategory = .popular
+    var showsSeeAll: Bool = false
     @State private var movies: [TMDBMovie] = []
     @State private var isLoading = true
     
@@ -419,10 +412,20 @@ struct ProfileCardSection: View {
                     .font(.system(size: 17, weight: .semibold))
                     .kerning(0.34)
                     .foregroundColor(.white)
-                
+
                 Spacer()
+
+                if showsSeeAll {
+                    HStack(spacing: 4) {
+                        Text("See All")
+                            .font(.system(size: 13, weight: .semibold))
+                        Image(systemName: "chevron.forward")
+                            .font(.system(size: 11, weight: .semibold))
+                    }
+                    .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+                }
             }
-            .padding(.horizontal, 8)
+            .padding(.horizontal, 16)
             
             ScrollView(.horizontal) {
                 HStack(spacing: 10) {
@@ -446,8 +449,8 @@ struct ProfileCardSection: View {
                     }
                 }
                 .padding(.vertical, 10)
-                .padding(.leading, 8)
-                .padding(.trailing, 8)
+                .padding(.leading, 16)
+                .padding(.trailing, 16)
             }
             .scrollIndicators(.hidden)
         }
@@ -459,8 +462,23 @@ struct ProfileCardSection: View {
     private func loadMovies() async {
         isLoading = true
         do {
-            movies = try await TMDBService.shared.fetchPopularMovies()
-            print("✅ Loaded \(movies.count) popular movies")
+            switch category {
+            case .trending:
+                movies = try await TMDBService.shared.fetchTrendingMovies()
+            case .topRated:
+                movies = try await TMDBService.shared.fetchTopRatedMovies()
+            case .nowPlaying:
+                movies = try await TMDBService.shared.fetchNowPlayingMovies()
+            case .upcoming:
+                movies = try await TMDBService.shared.fetchUpcomingMovies()
+            default:
+                if let genreId = category.genreId {
+                    movies = try await TMDBService.shared.fetchMoviesByGenre(genreId: genreId)
+                } else {
+                    movies = try await TMDBService.shared.fetchPopularMovies()
+                }
+            }
+            print("✅ Loaded \(movies.count) movies for \(category.displayName)")
             isLoading = false
         } catch {
             print("❌ Error loading movies: \(error.localizedDescription)")

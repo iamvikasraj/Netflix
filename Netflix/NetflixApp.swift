@@ -15,6 +15,7 @@ struct NetflixApp: App {
         WindowGroup {
             MainView()
                 .environmentObject(navigationCoordinator)
+                .preferredColorScheme(.dark)
         }
     }
 }

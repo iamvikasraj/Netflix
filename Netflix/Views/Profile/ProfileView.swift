@@ -1,10 +1,15 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @State private var scrollOffset: CGFloat = 0
+
     var body: some View {
         GeometryReader { geometry in
+            // Collapse progress: 0 = fully expanded, 1 = fully collapsed
+            let collapse = min(max(scrollOffset / 120, 0), 1)
             ZStack(alignment: .top) {
-                Header(pageName: "My Netflix", r1: "share", r2: "search", r3: "menu")
+                Header(pageName: "My Netflix", r1: "share", r2: "search", r3: "menu", background: AnyShapeStyle(.clear))
+                    .scrollHeaderBackground(progress: collapse)
                     .zIndex(1)
                 
                 // Main content
@@ -33,17 +38,25 @@ struct ProfileView: View {
                         .frame(width: 89.5, alignment: .top)
                         
                         
-                        NotificationSection(SectionName: "Notifications", SectionColor: .red)
-                        
-                        DownloadsSection(SectionName: "Downloads", SectionColor: .purple)
-                        
-                        ProfileCardSection(title: "My section")
-                        
+                        ProfileCardSection(title: "My List", category: .popular, showsSeeAll: true)
+
+                        ProfileCardSection(title: "Trailers you have watched", category: .trending)
+
+                        ProfileCardSection(title: "Continue Watching", category: .nowPlaying)
+
+                        ProfileCardSection(title: "Recently Watched", category: .topRated)
+
+                        ProfileCardSection(title: "Go behind the scenes", category: .upcoming)
+
                         Spacer()
                     }
                     .padding(.top, 120)
                     .padding(.vertical, 16)
-                    .padding(.horizontal, 16)
+                }
+                .onScrollGeometryChange(for: CGFloat.self) { proxy in
+                    proxy.contentOffset.y
+                } action: { _, newValue in
+                    scrollOffset = max(0, newValue)
                 }
                 .scrollIndicators(.hidden)
                 .ignoresSafeArea(.all)

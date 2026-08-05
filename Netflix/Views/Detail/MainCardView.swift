@@ -141,8 +141,8 @@ struct MainCardView: View {
                                         .frame(maxWidth: .infinity, alignment: .center)
                                 }
                                 .padding(0)
-                                .frame(width: .infinity, alignment: .top)
-                                
+                                .frame(maxWidth: .infinity, alignment: .top)
+
                                 VStack(alignment: .center, spacing: 6) {
                                     Image("rate")
                                         .resizable()
@@ -157,8 +157,8 @@ struct MainCardView: View {
                                         .frame(maxWidth: .infinity, alignment: .center)
                                 }
                                 .padding(0)
-                                .frame(width: .infinity, alignment: .top)
-                            
+                                .frame(maxWidth: .infinity, alignment: .top)
+
                                 VStack(alignment: .center, spacing: 6) {
                                     Image("share_2")
                                         .resizable()
@@ -173,8 +173,8 @@ struct MainCardView: View {
                                         .frame(maxWidth: .infinity, alignment: .center)
                                 }
                                 .padding(0)
-                                .frame(width: .infinity, alignment: .top)
-                                
+                                .frame(maxWidth: .infinity, alignment: .top)
+
                                 Button(action: {
                                     // TODO: Handle secondary download action
                                     print("Secondary download tapped")
@@ -193,7 +193,7 @@ struct MainCardView: View {
                                             .frame(maxWidth: .infinity, alignment: .center)
                                     }
                                     .padding(0)
-                                    .frame(width: .infinity, alignment: .top)
+                                    .frame(maxWidth: .infinity, alignment: .top)
                                 }
                                 .buttonStyle(.plain)
                             }
